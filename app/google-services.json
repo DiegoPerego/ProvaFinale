@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "226405963619",
+    "firebase_url": "https://provafinale-b1597.firebaseio.com",
+    "project_id": "provafinale-b1597",
+    "storage_bucket": "provafinale-b1597.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:226405963619:android:947342a10c3d01ee",
+        "android_client_info": {
+          "package_name": "diegoperego.provafinale"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "226405963619-kdesm8rr0j0r4tqiiina4searqfciq0i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "diegoperego.provafinale",
+            "certificate_hash": "a997f8aef73db17c1d27753e285f3144fb2ff1e8"
+          }
+        },
+        {
+          "client_id": "226405963619-9c7hq6ebm9b44mpvnh4b4o9g456l6mqt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvSZB9FBXnNi4tCwSJMekakWiyj0l8QrE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "226405963619-9c7hq6ebm9b44mpvnh4b4o9g456l6mqt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
