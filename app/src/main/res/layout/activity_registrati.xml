@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="diegoperego.provafinale.RegistratiActivity">
+
+    <TextView
+        android:id="@+id/tRegistratiAct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="41dp"
+        android:fontFamily="serif"
+        android:text="Registrati"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:textStyle="italic" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tRegistratiAct"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="43dp"
+        android:entries="@array/user_array" />
+
+    <EditText
+        android:id="@+id/eUsernameR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spinner"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="69dp"
+        android:ems="10"
+        android:hint="Username"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textStyle="italic" />
+
+    <EditText
+        android:id="@+id/ePasswordR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/eUsernameR"
+        android:layout_below="@+id/eUsernameR"
+        android:layout_marginTop="42dp"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textAlignment="center"
+        android:textStyle="italic" />
+
+    <Button
+        android:id="@+id/bRegistrati"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ePasswordR"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="72dp"
+        android:text="Registrati"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textStyle="italic" />
+</RelativeLayout>
