@@ -2,26 +2,31 @@ package diegoperego.provafinale.Model;
 
 import android.content.SharedPreferences;
 
+import java.io.Serializable;
+import java.util.Date;
+
 /**
  * Created by utente3.academy on 14-Dec-17.
  */
 
-public class Pacco {
+public class Pacco implements Serializable{
 
     private String id;
     private String deposito;
     private String indirizzoConsegna;
     private String destinatario;
     private String dimensioni;
-    private String dataConsegna;
+    private Date dataConsegna;
+    private String stato;
 
-    public Pacco(String id, String deposito, String indirizzo, String destinatario, String dimensioni, String dataConsegna) {
+    public Pacco(String id, String deposito, String indirizzo, String destinatario, String dimensioni, Date dataConsegna, String stato) {
         this.id = id;
         this.deposito = deposito;
         this.indirizzoConsegna = indirizzo;
         this.destinatario = destinatario;
         this.dimensioni = dimensioni;
         this.dataConsegna = dataConsegna;
+        this.stato = stato;
     }
 
     public Pacco() {
@@ -31,6 +36,7 @@ public class Pacco {
         this.destinatario = null;
         this.dimensioni = null;
         this.dataConsegna = null;
+        this.stato = null;
     }
 
     public String getIndirizzoConsegna() {
@@ -81,11 +87,19 @@ public class Pacco {
         this.dimensioni = dimensioni;
     }
 
-    public String getDataConsegna() {
+    public Date getDataConsegna() {
         return dataConsegna;
     }
 
-    public void setDataConsegna(String dataConsegna) {
+    public void setDataConsegna(Date dataConsegna) {
         this.dataConsegna = dataConsegna;
+    }
+
+    public String getStato() {
+        return stato;
+    }
+
+    public void setStato(String stato) {
+        this.stato = stato;
     }
 }

@@ -58,16 +58,17 @@ public class LoginActivity extends AppCompatActivity implements TaskDelegate{
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String  resp = new String(responseBody);
-                String s = resp.substring(1, resp.length()-1);
-                if (! password.equals("null")){
-                    if (password.equals(s)){
-                        startIntent();
-                    }
-                    else {
-                        delegate.taskCompleto("Password errata");
+                if(!resp.equals("null")) {
+                    if (!password.equals("null")) {
+                        String s = resp.substring(1, resp.length() - 1);
+                        if (password.equals(s)) {
+                            startIntent();
+                        } else {
+                            delegate.taskCompleto("Controlla che i dati siano giusti");
+                        }
                     }
                 }else {
-                    delegate.taskCompleto("Password non Inserita");
+                    delegate.taskCompleto("Registrati");
                 }
             }
 

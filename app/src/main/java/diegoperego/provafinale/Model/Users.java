@@ -1,5 +1,6 @@
 package diegoperego.provafinale.Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ import java.util.List;
  * Created by utente3.academy on 14-Dec-17.
  */
 
-public class Users {
+public class Users implements Serializable{
 
     public String username;
     public String password;

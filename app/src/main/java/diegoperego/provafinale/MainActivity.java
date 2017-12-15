@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
         pacchi = new Intent(getApplicationContext(), PacchiActivity.class);
         utenti = new Intent(getApplicationContext(), UtentiActivity.class);
 
+        startActivity(login);
+
         if (users instanceof Corriere){
             startActivity(pacchi);
         }else if(users instanceof Utente){

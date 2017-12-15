@@ -61,6 +61,7 @@
         android:layout_below="@+id/ePasswordR"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="72dp"
+        android:onClick="onRegistratiCL"
         android:text="Registrati"
         android:textAllCaps="false"
         android:textSize="18sp"

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="diegoperego.provafinale.DettaglioCorriereActivity">
+
+    <TextView
+        android:id="@+id/tInserrt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:fontFamily="serif"
+        android:text="Inserisci il pacco da far ritirare"
+        android:textAlignment="center"
+        android:textSize="22sp"
+        android:textStyle="italic" />
+
+    <EditText
+        android:id="@+id/eDesposito"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/eIndirizzoCon"
+        android:layout_below="@+id/tInserrt"
+        android:layout_marginTop="39dp"
+        android:ems="10"
+        android:hint="Deposito"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textStyle="italic" />
+
+    <EditText
+        android:id="@+id/eIndirizzoCon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/eDataConsegna"
+        android:layout_below="@+id/eDesposito"
+        android:layout_marginTop="35dp"
+        android:ems="10"
+        android:hint="Indirizzo di consegna"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textStyle="italic" />
+
+    <EditText
+        android:id="@+id/eDataConsegna"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/eIndirizzoCon"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="37dp"
+        android:ems="10"
+        android:hint="Data Consegna"
+        android:inputType="date"
+        android:textAlignment="center"
+        android:textStyle="italic" />
+
+    <Spinner
+        android:id="@+id/spinnerDim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/eDataConsegna"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="37dp"
+        android:entries="@array/pacco_array" />
+
+    <Button
+        android:id="@+id/bInConsegna"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="58dp"
+        android:onClick="onConsegnaClick"
+        android:text="In Consegna"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textStyle="italic" />
+</RelativeLayout>

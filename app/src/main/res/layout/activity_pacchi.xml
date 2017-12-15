@@ -20,13 +20,14 @@
 
     <TextView
         android:id="@+id/tBenvenutoCVal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tBenvenutoC"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         android:fontFamily="monospace"
         android:text="TextView"
+        android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold|italic" />
 
@@ -49,10 +50,16 @@
         android:layout_alignParentStart="true"
         android:layout_marginBottom="11dp">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerPacchi"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="10dp"/>
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerPacchi"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp" />
+        </android.support.v4.widget.SwipeRefreshLayout>
     </RelativeLayout>
 </RelativeLayout>

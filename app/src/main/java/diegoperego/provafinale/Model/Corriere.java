@@ -1,12 +1,13 @@
 package diegoperego.provafinale.Model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by utente3.academy on 14-Dec-17.
  */
 
-public class Corriere extends Users{
+public class Corriere extends Users implements Serializable{
 
     public Corriere(String username, String password, List<Pacco> pacchi) {
         super(username, password, pacchi);

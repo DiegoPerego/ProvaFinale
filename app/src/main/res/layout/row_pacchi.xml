@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="200dp">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardPacchi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="180dp">
+
+            <TextView
+                android:id="@+id/tDest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="20dp"
+                android:text="Destinatario:"
+                android:textSize="18sp"
+                android:textStyle="bold|italic" />
+
+            <TextView
+                android:id="@+id/tDestVal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/tDest"
+                android:layout_marginStart="46dp"
+                android:layout_toEndOf="@+id/tDest"
+                android:fontFamily="serif"
+                android:text="TextView"
+                android:textSize="18sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/tIndirizzo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/tDest"
+                android:layout_below="@+id/tDest"
+                android:layout_marginTop="22dp"
+                android:text="Indirizzo:"
+                android:textSize="18sp"
+                android:textStyle="bold|italic" />
+
+            <TextView
+                android:id="@+id/tIndirizzoVal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/tIndirizzo"
+                android:layout_alignStart="@+id/tDestVal"
+                android:fontFamily="serif"
+                android:text="TextView"
+                android:textSize="18sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/tData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/tIndirizzo"
+                android:layout_below="@+id/tIndirizzo"
+                android:layout_marginTop="31dp"
+                android:text="Data Consegna:"
+                android:textSize="18sp"
+                android:textStyle="bold|italic" />
+
+            <TextView
+                android:id="@+id/tDataVal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/tData"
+                android:layout_alignStart="@+id/tIndirizzoVal"
+                android:fontFamily="serif"
+                android:text="TextView"
+                android:textSize="18sp"
+                android:textStyle="italic" />
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</RelativeLayout>
