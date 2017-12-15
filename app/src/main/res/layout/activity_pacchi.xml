@@ -44,22 +44,31 @@
         android:textStyle="italic" />
 
     <RelativeLayout
+        android:id="@+id/rela"
         android:layout_width="match_parent"
         android:layout_height="330dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="11dp">
+        android:layout_marginBottom="11dp"
+        android:visibility="gone">
 
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/swipe"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerPacchi"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:padding="10dp" />
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerPacchi"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="10dp" />
-        </android.support.v4.widget.SwipeRefreshLayout>
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tNiente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tPacchi"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="173dp"
+        android:text="Non Hai Pacchi Commissionati"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="italic" />
 </RelativeLayout>

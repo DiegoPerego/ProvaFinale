@@ -29,10 +29,34 @@ public class JsonParser {
             Iterator iteratorP = jpacco.keys();
 
             while (iteratorP.hasNext()){
-
+                key = (String) iteratorP.next();
+                JSONObject paccoJ = jpacco.getJSONObject(key);
+                Iterator iteratorJp = paccoJ.keys();
+                Pacco pacco = new Pacco();
+                while (iteratorJp.hasNext()) {
+                    String keys = (String) iteratorJp.next();
+                    String s = paccoJ.getString(keys);
+                    if (keys.equals("dataConsegna")) {
+                        pacco.setDataConsegna(s);
+                    }
+                    if (keys.equals("deposito")) {
+                        pacco.setDeposito(s);
+                    }
+                    if (keys.equals("destinatario")) {
+                        pacco.setDestinatario(s);
+                    }
+                    if (keys.equals("dimensioni")) {
+                        pacco.setDimensioni(s);
+                    }
+                    if (keys.equals("indirizzo")) {
+                        pacco.setIndirizzo(s);
+                    }
+                    if (keys.equals("stato")) {
+                        pacco.setStato(s);
+                    }
+                }
+                pacchi.add(pacco);
             }
-
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -66,7 +90,6 @@ public class JsonParser {
     public static String setPosition(String json){
         int num = 1;
         String numeri = "";
-        String getKey = null;
         JSONObject pacchi= null;
         try {
             pacchi = new JSONObject(json);
@@ -86,4 +109,6 @@ public class JsonParser {
         }
         return numeri;
     }
+
+
 }

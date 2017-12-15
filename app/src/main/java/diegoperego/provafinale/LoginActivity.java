@@ -84,12 +84,12 @@ public class LoginActivity extends AppCompatActivity implements TaskDelegate{
         Intent utenti = new Intent(getApplicationContext(), UtentiActivity.class);
         if (utente.isChecked()){
             Users u = new Utente(username, password);
-            InternalStorage.writeObject(getApplicationContext(), "users", u);
+            InternalStorage.writeObject(getApplicationContext(), "utente", u);
             startActivity(utenti);
         }
         if (corriere.isChecked()) {
             Users c = new Corriere(username, password);
-            InternalStorage.writeObject(getApplicationContext(), "users", c);
+            InternalStorage.writeObject(getApplicationContext(), "corriere", c);
             startActivity(pacchi);
         }
     }

@@ -26,24 +26,23 @@ import diegoperego.provafinale.Util.TaskDelegate;
 
 public class UtentiActivity extends AppCompatActivity implements TaskDelegate{
 
-    private Users users;
+    private Users userU;
     private TextView benvenuto;
     private RecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
     private CorrieriAdapter corrieriAdapter;
     private ProgressDialog dialog;
     private List<Corriere> corrieri;
-    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_utenti);
 
-        users = (Users) InternalStorage.readObject(getApplicationContext(), "users");
+        userU = (Users) InternalStorage.readObject(getApplicationContext(), "utente");
 
         benvenuto = findViewById(R.id.tBenvenutoUVal);
-        benvenuto.setText(users.getUsername());
+        benvenuto.setText(userU.getUsername());
 
         final TaskDelegate delegate = this;
 
@@ -53,14 +52,6 @@ public class UtentiActivity extends AppCompatActivity implements TaskDelegate{
         recyclerView.setLayoutManager(layoutManager);
 
         restCorrieri(delegate);
-
-        swipeRefreshLayout = findViewById(R.id.swiperef);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                restCorrieri(delegate);
-            }
-        });
 
     }
 
@@ -78,7 +69,6 @@ public class UtentiActivity extends AppCompatActivity implements TaskDelegate{
                 corrieri = JsonParser.findCorriere(resp);
                 corrieriAdapter = new CorrieriAdapter(getApplicationContext(), corrieri);
                 recyclerView.setAdapter(corrieriAdapter);
-                swipeRefreshLayout.setRefreshing(false);
                 delegate.taskCompleto("Caricamento Effettuato");
             }
 

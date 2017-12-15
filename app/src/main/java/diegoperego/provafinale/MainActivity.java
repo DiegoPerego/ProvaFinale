@@ -14,14 +14,16 @@ public class MainActivity extends AppCompatActivity {
     private Intent login;
     private Intent pacchi;
     private Intent utenti;
-    private Users users;
+    private Users userU;
+    private Users userC;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        users = (Users) InternalStorage.readObject(getApplicationContext(), "users");
+        userU = (Users) InternalStorage.readObject(getApplicationContext(), "utente");
+        userC = (Users) InternalStorage.readObject(getApplicationContext(), "corriere");
 
         login = new Intent(getApplicationContext(), LoginActivity.class);
         pacchi = new Intent(getApplicationContext(), PacchiActivity.class);
@@ -29,9 +31,9 @@ public class MainActivity extends AppCompatActivity {
 
         startActivity(login);
 
-        if (users instanceof Corriere){
+        if (userC instanceof Corriere){
             startActivity(pacchi);
-        }else if(users instanceof Utente){
+        }else if(userU instanceof Utente){
             startActivity(utenti);
         }else {
             startActivity(login);

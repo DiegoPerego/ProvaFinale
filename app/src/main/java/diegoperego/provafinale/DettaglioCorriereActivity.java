@@ -35,11 +35,11 @@ public class DettaglioCorriereActivity extends AppCompatActivity implements Task
     private EditText data;
     private Spinner spinner;
     private ProgressDialog dialog;
-    private Users users;
+    private Users userU;
     private DatabaseReference databaseReferenceUtente;
     private DatabaseReference databaseReferenceCorriere;
     private Pacco pacco;
-    private Button inConsegna;
+    private Button commissionato;
     private String corriere;
 
     @Override
@@ -50,20 +50,20 @@ public class DettaglioCorriereActivity extends AppCompatActivity implements Task
         indirizzo = findViewById(R.id.eIndirizzoCon);
         data = findViewById(R.id.eDataConsegna);
         spinner = findViewById(R.id.spinnerDim);
-        inConsegna = findViewById(R.id.bInConsegna);
+        commissionato = findViewById(R.id.bCommissionato);
 
         final TaskDelegate delegate = this;
 
-        users = (Users) InternalStorage.readObject(getApplicationContext(), "users");
+        userU = (Users) InternalStorage.readObject(getApplicationContext(), "utente");
         corriere = (String) InternalStorage.readObject(getApplicationContext(), "nomeCorriere");
 
-        databaseReferenceUtente = FirebaseDatabase.getInstance().getReferenceFromUrl("https://provafinale-b1597.firebaseio.com/Users/Utente/"+ users.getUsername()+"/Pacchi");
-        databaseReferenceCorriere = FirebaseDatabase.getInstance().getReferenceFromUrl("https://provafinale-b1597.firebaseio.com/Users/Corriere/"+ corriere + "/Pacchi");
-
-        inConsegna.setOnClickListener(new View.OnClickListener() {
+        commissionato.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                createPacco();
                 numPacco(delegate);
+                databaseReferenceUtente = FirebaseDatabase.getInstance().getReferenceFromUrl("https://provafinale-b1597.firebaseio.com/Users/Utente/"+ userU.getUsername()+"/Pacchi");
+                databaseReferenceCorriere = FirebaseDatabase.getInstance().getReferenceFromUrl("https://provafinale-b1597.firebaseio.com/Users/Corriere/"+ corriere + "/Pacchi");
                 Intent i = new Intent(getApplicationContext(), UtentiActivity.class);
                 startActivity(i);
             }
@@ -76,7 +76,7 @@ public class DettaglioCorriereActivity extends AppCompatActivity implements Task
         String ind = indirizzo.getText().toString();
         String date = data.getText().toString();
         if(dep.equals("") || !ind.equals("") || !date.equals("")){
-            pacco = new Pacco(dep, ind, users.getUsername(), spinnerItem(), date, "In Consegna" );
+            pacco = new Pacco(dep, ind, userU.getUsername(), spinnerItem(), date, "Commissionato" );
         }
     }
 
@@ -85,15 +85,15 @@ public class DettaglioCorriereActivity extends AppCompatActivity implements Task
         dialog.setMessage("Caricamento prodotti");
         dialog.show();
 
-        FirebaseRest.get("Users/Utente/" + users.getUsername(), null, new AsyncHttpResponseHandler() {
+        FirebaseRest.get("Users/Utente/" + userU.getUsername()+"/Pacchi", null, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String resp = new String(responseBody);
                 String num = JsonParser.setPosition(resp);
-                createPacco();
                 databaseReferenceUtente.child(num).setValue(pacco);
+                databaseReferenceCorriere.child(num).setValue(pacco);
                 databaseReferenceCorriere.child(num).child("stato").setValue(pacco.getStato());
-                delegate.taskCompleto("Completato");
+                delegate.taskCompleto("Commissionato");
             }
 
             @Override
@@ -116,19 +116,4 @@ public class DettaglioCorriereActivity extends AppCompatActivity implements Task
         Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
     }
 
-    public String formatDate(String date){
-        Format format = new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY);
-        return format.format(date);
-    }
-
-    public static Date formDate(String date){
-        SimpleDateFormat format = new SimpleDateFormat("hh:mm dd/MM/yyyy", Locale.ITALY);
-        Date datefin = new Date();
-        try {
-            datefin = format.parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return datefin;
-    }
 }

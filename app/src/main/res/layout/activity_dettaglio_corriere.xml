@@ -68,13 +68,13 @@
         android:entries="@array/pacco_array" />
 
     <Button
-        android:id="@+id/bInConsegna"
+        android:id="@+id/bCommissionato"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="58dp"
-        android:text="In Consegna"
+        android:text="Commisionato"
         android:textAllCaps="false"
         android:textSize="18sp"
         android:textStyle="italic" />
