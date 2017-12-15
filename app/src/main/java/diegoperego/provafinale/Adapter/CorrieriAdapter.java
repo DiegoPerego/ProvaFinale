@@ -14,6 +14,7 @@ import java.util.List;
 import diegoperego.provafinale.DettaglioCorriereActivity;
 import diegoperego.provafinale.Model.Corriere;
 import diegoperego.provafinale.R;
+import diegoperego.provafinale.Util.InternalStorage;
 
 /**
  * Created by utente3.academy on 15-Dec-17.
@@ -39,12 +40,13 @@ public class CorrieriAdapter extends RecyclerView.Adapter<CorrieriAdapter.ViewCo
     @Override
     public void onBindViewHolder(CorrieriAdapter.ViewCorrieri holder, int position) {
 
-        Corriere corriere = corrieri.get(position);
+        final Corriere corriere = corrieri.get(position);
         holder.corriere.setText(corriere.getUsername());
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                InternalStorage.writeObject(context, "nomeCorriere", corriere.getUsername());
                 Intent intent = new Intent(context, DettaglioCorriereActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);

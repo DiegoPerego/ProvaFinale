@@ -46,7 +46,7 @@ public class PacchiAdapter extends RecyclerView.Adapter<PacchiAdapter.ViewPacchi
         Pacco pacco = pacchi.get(position);
         holder.destinatario.setText(pacco.getDestinatario());
         holder.indirizzo.setText(pacco.getIndirizzo());
-        holder.dataConsegna.setText(formatDate(pacco.getDataConsegna()));
+        holder.dataConsegna.setText(pacco.getDataConsegna());
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,9 +81,5 @@ public class PacchiAdapter extends RecyclerView.Adapter<PacchiAdapter.ViewPacchi
             cardView = itemView.findViewById(R.id.cardPacchi);
         }
 
-    }
-    public String formatDate(Date date){
-        Format format = new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY);
-        return format.format(date);
     }
 }

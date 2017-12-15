@@ -62,4 +62,28 @@ public class JsonParser {
 
         return corrieri;
     }
+
+    public static String setPosition(String json){
+        int num = 1;
+        String numeri = "";
+        String getKey = null;
+        JSONObject pacchi= null;
+        try {
+            pacchi = new JSONObject(json);
+            Iterator iterator = pacchi.keys();
+            while (iterator.hasNext()){
+                num++;
+                iterator.next();
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        if(num<10){
+            numeri = "0"+ num;
+        }else {
+            numeri=""+num;
+        }
+        return numeri;
+    }
 }

@@ -11,18 +11,16 @@ import java.util.Date;
 
 public class Pacco implements Serializable{
 
-    private String id;
     private String deposito;
-    private String indirizzoConsegna;
+    private String indirizzo;
     private String destinatario;
     private String dimensioni;
-    private Date dataConsegna;
+    private String dataConsegna;
     private String stato;
 
-    public Pacco(String id, String deposito, String indirizzo, String destinatario, String dimensioni, Date dataConsegna, String stato) {
-        this.id = id;
+    public Pacco( String deposito, String indirizzo, String destinatario, String dimensioni, String dataConsegna, String stato) {
         this.deposito = deposito;
-        this.indirizzoConsegna = indirizzo;
+        this.indirizzo = indirizzo;
         this.destinatario = destinatario;
         this.dimensioni = dimensioni;
         this.dataConsegna = dataConsegna;
@@ -30,29 +28,12 @@ public class Pacco implements Serializable{
     }
 
     public Pacco() {
-        this.id = null;
         this.deposito = null;
-        this.indirizzoConsegna = null;
+        this.indirizzo = null;
         this.destinatario = null;
         this.dimensioni = null;
         this.dataConsegna = null;
         this.stato = null;
-    }
-
-    public String getIndirizzoConsegna() {
-        return indirizzoConsegna;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setIndirizzoConsegna(String indirizzoConsegna) {
-        this.indirizzoConsegna = indirizzoConsegna;
     }
 
     public String getDeposito() {
@@ -64,11 +45,11 @@ public class Pacco implements Serializable{
     }
 
     public String getIndirizzo() {
-        return indirizzoConsegna;
+        return indirizzo;
     }
 
     public void setIndirizzo(String indirizzo) {
-        this.indirizzoConsegna = indirizzo;
+        this.indirizzo = indirizzo;
     }
 
     public String getDestinatario() {
@@ -87,11 +68,11 @@ public class Pacco implements Serializable{
         this.dimensioni = dimensioni;
     }
 
-    public Date getDataConsegna() {
+    public String getDataConsegna() {
         return dataConsegna;
     }
 
-    public void setDataConsegna(Date dataConsegna) {
+    public void setDataConsegna(String dataConsegna) {
         this.dataConsegna = dataConsegna;
     }
 
