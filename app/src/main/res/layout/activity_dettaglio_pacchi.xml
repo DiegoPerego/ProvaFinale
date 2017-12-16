@@ -7,10 +7,10 @@
     tools:context="diegoperego.provafinale.DettaglioPacchiActivity">
 
     <fragment
-        android:id="@+id/map"
+        android:id="@+id/maps"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="390dp"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true" />
 
@@ -44,9 +44,10 @@
         android:id="@+id/bConsegnato"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/map"
+        android:layout_below="@+id/maps"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
+        android:onClick="onConsegnatoClick"
         android:text="Consegnato"
         android:textAlignment="center"
         android:textAllCaps="false"

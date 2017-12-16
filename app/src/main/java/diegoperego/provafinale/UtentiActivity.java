@@ -33,6 +33,7 @@ public class UtentiActivity extends AppCompatActivity implements TaskDelegate{
     private CorrieriAdapter corrieriAdapter;
     private ProgressDialog dialog;
     private List<Corriere> corrieri;
+    private SwipeRefreshLayout swipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,15 @@ public class UtentiActivity extends AppCompatActivity implements TaskDelegate{
 
         restCorrieri(delegate);
 
+        swipe = findViewById(R.id.swipeCorrieri);
+        swipe.setColorSchemeColors(getResources().getColor(android.R.color.holo_red_dark));
+        swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                restCorrieri(delegate);
+            }
+        });
+
     }
 
     public void restCorrieri(final TaskDelegate delegate){
@@ -69,6 +79,7 @@ public class UtentiActivity extends AppCompatActivity implements TaskDelegate{
                 corrieri = JsonParser.findCorriere(resp);
                 corrieriAdapter = new CorrieriAdapter(getApplicationContext(), corrieri);
                 recyclerView.setAdapter(corrieriAdapter);
+                swipe.setRefreshing(false);
                 delegate.taskCompleto("Caricamento Effettuato");
             }
 

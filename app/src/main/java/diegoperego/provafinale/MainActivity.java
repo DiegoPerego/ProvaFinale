@@ -29,15 +29,14 @@ public class MainActivity extends AppCompatActivity {
         pacchi = new Intent(getApplicationContext(), PacchiActivity.class);
         utenti = new Intent(getApplicationContext(), UtentiActivity.class);
 
-        startActivity(login);
-
         if (userC instanceof Corriere){
             startActivity(pacchi);
-        }else if(userU instanceof Utente){
-            startActivity(utenti);
-        }else {
-            startActivity(login);
         }
+        if(userU instanceof Utente){
+            startActivity(utenti);
+        }
+
+        startActivity(login);
 
     }
 }

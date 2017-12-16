@@ -63,7 +63,6 @@ public class JsonParser {
         return pacchi;
     }
 
-
     public static List<Corriere> findCorriere(String json){
 
         List<Corriere> corrieri = new ArrayList<>();
@@ -86,29 +85,5 @@ public class JsonParser {
 
         return corrieri;
     }
-
-    public static String setPosition(String json){
-        int num = 1;
-        String numeri = "";
-        JSONObject pacchi= null;
-        try {
-            pacchi = new JSONObject(json);
-            Iterator iterator = pacchi.keys();
-            while (iterator.hasNext()){
-                num++;
-                iterator.next();
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        if(num<10){
-            numeri = "0"+ num;
-        }else {
-            numeri=""+num;
-        }
-        return numeri;
-    }
-
 
 }

@@ -21,7 +21,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import diegoperego.provafinale.LoginActivity;
+import diegoperego.provafinale.Model.Corriere;
+import diegoperego.provafinale.Model.Users;
+import diegoperego.provafinale.Model.Utente;
+import diegoperego.provafinale.PacchiActivity;
 import diegoperego.provafinale.R;
+import diegoperego.provafinale.UtentiActivity;
+import diegoperego.provafinale.Util.InternalStorage;
 
 /**
  * Created by utente3.academy on 15-Dec-17.
@@ -29,8 +35,12 @@ import diegoperego.provafinale.R;
 
 public class FirebasePush extends Service{
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private DatabaseReference usersReference = database.getReferenceFromUrl("");
+    private String url = "https://provafinale-b1597.firebaseio.com/Users";
+    private DatabaseReference usersReference = database.getReferenceFromUrl(url);
     private ChildEventListener handler;
+    private Users userC;
+    private Users userU;
+    private String stato;
 
     @Nullable
     @Override
@@ -50,33 +60,36 @@ public class FirebasePush extends Service{
         return Service.START_STICKY;
     }
 
-    /*@Override
-    public void onTaskRemoved(Intent rootIntent){
-        //forza app a non chiudere service
-        Intent restartServiceTask = new Intent(getApplicationContext(),this.getClass());
-        restartServiceTask.setPackage(getPackageName());
-        PendingIntent restartPendingIntent =PendingIntent.getService(getApplicationContext(), 1,restartServiceTask, PendingIntent.FLAG_ONE_SHOT);
-        AlarmManager myAlarmService = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
-        myAlarmService.set(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + 1000, restartPendingIntent);
-        super.onTaskRemoved(rootIntent);
-    }*/
-
     @Override
     public void onCreate() {
         super.onCreate();
+
+        userU = (Users) InternalStorage.readObject(getApplicationContext(), "utente");
+        userC = (Users) InternalStorage.readObject(getApplicationContext(), "corriere");
+        stato = (String) InternalStorage.readObject(getApplicationContext(), "stato");
+
+        if(userC instanceof Corriere){
+            url = url+ "/Corriere/"+ userC.getUsername() + "/Pacchi/";
+        }else if(userU instanceof Utente){
+            url = url+ "/Utente/"+ userU.getUsername() + "/Pacchi/";
+        }
+
+        usersReference = database.getReferenceFromUrl(url);
 
         handler = new ChildEventListener() {
 
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Log.i("FIREBASE_SERVICE", "ADD: " + dataSnapshot.getKey());
+                if (url.contains("Corriere") && dataSnapshot.exists()){
+                    activePushValidation(dataSnapshot.getKey());
+                }
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                 Log.i("FIREBASE_SERVICE", "CHANGE: " + dataSnapshot.getKey());
-                if (dataSnapshot.exists()) {
-                    //chiave che ha ricevuto quella modifica
+                if (url.contains("Utente") && dataSnapshot.exists()){
                     activePushValidation(dataSnapshot.getKey());
                 }
             }
@@ -101,27 +114,26 @@ public class FirebasePush extends Service{
     }
 
     public void activePushValidation(String commListener) {
-        Intent intent = new Intent(this, LoginActivity.class);
-        sendNotification(intent, "Nuovo post", commListener);
 
+        Intent intent = new Intent(this, UtentiActivity.class);
+        sendNotification(intent, "Notifica", commListener);
     }
 
     public void sendNotification(Intent intent, String title, String body) {
-        // funziona per tutti gli smartphone, notifiche push
+
         Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.mipmap.ic_launcher_round);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-        //pending indica dove andrà app all'apertura
+
         PendingIntent activity = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
 
-        // content provider getDefaultUri
+
         Uri dsUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
         builder.setContentTitle(title);
         builder.setContentText(body);
         builder.setAutoCancel(true);
         builder.setSound(dsUri);
-        //se togliamo la small potrebbe non funzionare
         builder.setSmallIcon(R.mipmap.ic_launcher);
         builder.setLargeIcon(bitmap);
         builder.setShowWhen(true);
@@ -130,4 +142,5 @@ public class FirebasePush extends Service{
         NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         manager.notify(0, builder.build());
     }
+
 }

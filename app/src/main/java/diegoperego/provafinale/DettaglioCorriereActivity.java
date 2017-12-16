@@ -23,6 +23,7 @@ import java.util.Locale;
 import cz.msebera.android.httpclient.Header;
 import diegoperego.provafinale.Model.Pacco;
 import diegoperego.provafinale.Model.Users;
+import diegoperego.provafinale.Service.FirebasePush;
 import diegoperego.provafinale.Util.FirebaseRest;
 import diegoperego.provafinale.Util.InternalStorage;
 import diegoperego.provafinale.Util.JsonParser;
@@ -41,6 +42,8 @@ public class DettaglioCorriereActivity extends AppCompatActivity implements Task
     private Pacco pacco;
     private Button commissionato;
     private String corriere;
+    private EditText numero;
+    private Intent notification;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +54,13 @@ public class DettaglioCorriereActivity extends AppCompatActivity implements Task
         data = findViewById(R.id.eDataConsegna);
         spinner = findViewById(R.id.spinnerDim);
         commissionato = findViewById(R.id.bCommissionato);
+        numero = findViewById(R.id.eNumeroPacco);
 
         final TaskDelegate delegate = this;
 
         userU = (Users) InternalStorage.readObject(getApplicationContext(), "utente");
         corriere = (String) InternalStorage.readObject(getApplicationContext(), "nomeCorriere");
+        notification = new Intent(this, FirebasePush.class);
 
         commissionato.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +69,7 @@ public class DettaglioCorriereActivity extends AppCompatActivity implements Task
                 numPacco(delegate);
                 databaseReferenceUtente = FirebaseDatabase.getInstance().getReferenceFromUrl("https://provafinale-b1597.firebaseio.com/Users/Utente/"+ userU.getUsername()+"/Pacchi");
                 databaseReferenceCorriere = FirebaseDatabase.getInstance().getReferenceFromUrl("https://provafinale-b1597.firebaseio.com/Users/Corriere/"+ corriere + "/Pacchi");
+                startService(notification);
                 Intent i = new Intent(getApplicationContext(), UtentiActivity.class);
                 startActivity(i);
             }
@@ -89,10 +95,10 @@ public class DettaglioCorriereActivity extends AppCompatActivity implements Task
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String resp = new String(responseBody);
-                String num = JsonParser.setPosition(resp);
-                databaseReferenceUtente.child(num).setValue(pacco);
-                databaseReferenceCorriere.child(num).setValue(pacco);
-                databaseReferenceCorriere.child(num).child("stato").setValue(pacco.getStato());
+                databaseReferenceUtente.child(numero.getText().toString()).setValue(pacco);
+                databaseReferenceCorriere.child(numero.getText().toString()).setValue(pacco);
+                databaseReferenceCorriere.child(numero.getText().toString()).child("stato").setValue(pacco.getStato());
+                InternalStorage.writeObject(getApplicationContext(),"posizione" ,numero.getText().toString());
                 delegate.taskCompleto("Commissionato");
             }
 
